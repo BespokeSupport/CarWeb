@@ -22,7 +22,7 @@ namespace BespokeSupport\CarWeb;
  * @license  MIT https://opensource.org/licenses/MIT
  * @link     https://github.com/BespokeSupport/CarWeb
  */
-class CarWebError extends \Exception
+class CarWebError extends \Exception implements \JsonSerializable
 {
     const ERROR_LOCAL_ONLY = 'No vehicles returned (from cache)';
     const ERROR_PARAMS = 'Required parameter not found (Username, Password, Key)';
@@ -42,5 +42,18 @@ class CarWebError extends \Exception
         $this->message = $errorMessage;
         $this->code = $errorCode;
         $this->apiData = $apiData;
+    }
+
+    /**
+     * JSON array
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'error' => $this->getMessage(),
+            'code' => $this->getCode(),
+        ];
     }
 }

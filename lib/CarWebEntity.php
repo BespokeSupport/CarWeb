@@ -22,7 +22,7 @@ namespace BespokeSupport\CarWeb;
  * @license  MIT https://opensource.org/licenses/MIT
  * @link     https://github.com/BespokeSupport/CarWeb
  */
-class CarWebEntity extends \ArrayObject
+class CarWebEntity extends \ArrayObject implements \JsonSerializable
 {
     public $Body;
     public $Colour;
@@ -75,5 +75,46 @@ class CarWebEntity extends \ArrayObject
                 }
             }
         }
+    }
+
+    /**
+     * JSON array
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'Body' => $this->Body,
+            'Colour' => $this->Colour,
+            'DateFirstRegistered' => $this->DateFirstRegistered,
+            'DateScrapped' => $this->DateScrapped,
+            'Doors' => $this->Doors,
+            'EngineModelCode' => $this->EngineModelCode,
+            'EngineSize' => $this->EngineSize,
+            'Fuel' => $this->Fuel,
+            'Gears' => $this->Gears,
+            'GrossWeight' => $this->GrossWeight,
+            'IsImported' => $this->IsImported,
+            'KerbWeight' => $this->KerbWeight,
+            'KerbWeightMax' => $this->KerbWeightMax,
+            'KerbWeightMin' => $this->KerbWeightMin,
+            'LastChangedOfKeeperDate' => $this->LastChangedOfKeeperDate,
+            'Make' => $this->Make,
+            'Mileage' => $this->Mileage,
+            'Model' => $this->Model,
+            'ModelComplete' => trim($this->ModelRange . ' '. $this->Model),
+            'ModelRange' => $this->ModelRange,
+            'TotalPreviousKeepers' => $this->TotalPreviousKeepers,
+            'Transmission' => $this->Transmission,
+            'VehicleImageUrl' => $this->VehicleImageUrl,
+            'VehicleImageUrlComplete' => $this->VehicleImageUrlComplete,
+            'Vin' => $this->Vin,
+            'Vrm' => $this->Vrm,
+            'YearManufactured' => $this->YearManufactured,
+            'created' => $this->created,
+            'provider' => $this->provider,
+            'dataSource' => 'api',
+        ];
     }
 }
