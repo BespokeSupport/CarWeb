@@ -1,13 +1,14 @@
 <?php
 /**
- * CarWeb API
+ * CarWeb API.
  *
  * PHP Version 5.4
  *
  * @category API
- * @package  BespokeSupport\CarWeb
+ *
  * @author   Richard Seymour <web@bespoke.support>
  * @license  MIT https://opensource.org/licenses/MIT
+ *
  * @link     https://github.com/BespokeSupport/CarWeb
  */
 
@@ -17,71 +18,72 @@ use BespokeSupport\DatabaseWrapper\AbstractDatabaseWrapper;
 use BespokeSupport\Reg\Reg;
 
 /**
- * Class CarWeb
+ * Class CarWeb.
  *
  * @category API
- * @package  BespokeSupport\CarWeb
+ *
  * @author   Richard Seymour <web@bespoke.support>
  * @license  MIT https://opensource.org/licenses/MIT
+ *
  * @link     https://github.com/BespokeSupport/CarWeb
  */
 class CarWeb
 {
     /**
-     * Reference for API
+     * Reference for API.
      *
      * @var null|string
      */
     protected $carWebClient = null;
     /**
-     * Domain used
+     * Domain used.
      *
      * @var null|string
      */
     protected $carWebDomainKeyUsed = null;
     /**
-     * Used domains
+     * Used domains.
      *
      * @var array
      */
     protected $carWebDomainsUsed = [];
     /**
-     * Required Vars
+     * Required Vars.
      *
      * @var array
      */
     protected $credentialsArray = [
-        "strUserName" => null,
-        "strPassword" => null,
-        "strKey1" => null,
+        'strUserName' => null,
+        'strPassword' => null,
+        'strKey1'     => null,
     ];
     /**
-     * Database
+     * Database.
      *
      * @var AbstractDatabaseWrapper
      */
     protected $database;
     /**
-     * Development
+     * Development.
      *
      * @var bool
      */
     protected $isDevelopment = false;
     /**
-     * Age of Cache
+     * Age of Cache.
      *
      * @var int
      */
     protected $maxAgeOfCachedResult = 32;
     /**
-     * Only cache
+     * Only cache.
      *
      * @var bool
      */
     protected $useCacheOnly = false;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $strUserName  User
      * @param string $strPassword  Pass
@@ -128,7 +130,7 @@ class CarWeb
     }
 
     /**
-     * Randomly choose a CarWeb domain
+     * Randomly choose a CarWeb domain.
      *
      * @throws \Exception
      *
@@ -152,7 +154,7 @@ class CarWeb
     }
 
     /**
-     * Build URL
+     * Build URL.
      *
      * @param string $endpoint API
      *
@@ -161,11 +163,12 @@ class CarWeb
     protected function getApiUrl($endpoint)
     {
         $domain = $this->getApiDomain();
-        return str_replace('{{carWebDomain}}', $domain, CarWebApi::$urlBase) . $endpoint;
+
+        return str_replace('{{carWebDomain}}', $domain, CarWebApi::$urlBase).$endpoint;
     }
 
     /**
-     * Add domain to Image
+     * Add domain to Image.
      *
      * @param CarWebEntity $carWebEntity Entity
      *
@@ -177,7 +180,7 @@ class CarWeb
             $domain = ($this->carWebDomainKeyUsed) ?
                 CarWebApi::$carWebDomains[$this->carWebDomainKeyUsed] :
                 $this->getApiDomain();
-            $carWebEntity->VehicleImageUrlComplete = 'https://' . $domain . $carWebEntity->VehicleImageUrl;
+            $carWebEntity->VehicleImageUrlComplete = 'https://'.$domain.$carWebEntity->VehicleImageUrl;
         }
 
         return $carWebEntity;
@@ -198,7 +201,7 @@ class CarWeb
     }
 
     /**
-     * Main search
+     * Main search.
      *
      * @param string $search          Search
      * @param bool   $exceptionOnNull Exception
@@ -230,13 +233,14 @@ class CarWeb
     }
 
     /**
-     * VIN lookup
+     * VIN lookup.
      *
      * @param string $search          Search
      * @param bool   $exceptionOnNull Exception
      *
-     * @return CarWebEntity|CarWebError|null Entity
      * @throws CarWebError
+     *
+     * @return CarWebEntity|CarWebError|null Entity
      */
     public function lookupVin($search, $exceptionOnNull = false)
     {
@@ -267,10 +271,10 @@ class CarWeb
         $callArray = array_merge(
             $this->credentialsArray,
             [
-                'strVIN' => $search,
-                'strVersion' => $this->getVersion(),
-                'strClientRef' => $this->carWebClient,
-                'strClientDescription' => $this->carWebClient
+                'strVIN'               => $search,
+                'strVersion'           => $this->getVersion(),
+                'strClientRef'         => $this->carWebClient,
+                'strClientDescription' => $this->carWebClient,
             ]
         );
 
@@ -284,13 +288,14 @@ class CarWeb
     }
 
     /**
-     * VRM Lookup
+     * VRM Lookup.
      *
      * @param string $search          Search
      * @param bool   $exceptionOnNull Exception
      *
-     * @return CarWebEntity|CarWebError|null Entity
      * @throws CarWebError
+     *
+     * @return CarWebEntity|CarWebError|null Entity
      */
     public function lookupVrm($search, $exceptionOnNull = false)
     {
@@ -321,10 +326,10 @@ class CarWeb
         $callArray = array_merge(
             $this->credentialsArray,
             [
-                'strVRM' => $search,
-                'strVersion' => $this->getVersion(),
-                'strClientRef' => $this->carWebClient,
-                'strClientDescription' => $this->carWebClient
+                'strVRM'               => $search,
+                'strVersion'           => $this->getVersion(),
+                'strClientRef'         => $this->carWebClient,
+                'strClientDescription' => $this->carWebClient,
             ]
         );
 
@@ -338,7 +343,7 @@ class CarWeb
     }
 
     /**
-     * Cache DIR
+     * Cache DIR.
      *
      * @param string $cacheDirectory DIR
      *
@@ -350,7 +355,7 @@ class CarWeb
     }
 
     /**
-     * Only use Cache
+     * Only use Cache.
      *
      * @param bool $bool Bool
      *
@@ -362,7 +367,7 @@ class CarWeb
     }
 
     /**
-     * Client Name
+     * Client Name.
      *
      * @param string $client ClientName
      *
@@ -374,7 +379,7 @@ class CarWeb
     }
 
     /**
-     * Set Database connection
+     * Set Database connection.
      *
      * @param AbstractDatabaseWrapper $database Database
      *
@@ -398,7 +403,7 @@ class CarWeb
     }
 
     /**
-     * Ignore age of cache
+     * Ignore age of cache.
      *
      * @return void
      */
