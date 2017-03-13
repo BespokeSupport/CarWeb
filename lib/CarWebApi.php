@@ -1,13 +1,14 @@
 <?php
 /**
- * CarWeb API
+ * CarWeb API.
  *
  * PHP Version 5.4
  *
  * @category API
- * @package  BespokeSupport\CarWeb
+ *
  * @author   Richard Seymour <web@bespoke.support>
  * @license  MIT https://opensource.org/licenses/MIT
+ *
  * @link     https://github.com/BespokeSupport/CarWeb
  */
 
@@ -17,18 +18,19 @@ use BespokeSupport\DatabaseWrapper\AbstractDatabaseWrapper;
 use GuzzleHttp\Client;
 
 /**
- * Class CarWebApi
+ * Class CarWebApi.
  *
  * @category API
- * @package  BespokeSupport\CarWeb
+ *
  * @author   Richard Seymour <web@bespoke.support>
  * @license  MIT https://opensource.org/licenses/MIT
+ *
  * @link     https://github.com/BespokeSupport/CarWeb
  */
 class CarWebApi
 {
     /**
-     * Domains
+     * Domains.
      *
      * @var array
      */
@@ -38,20 +40,20 @@ class CarWebApi
         'www3.carwebuk.com',
     ];
     /**
-     * Version
+     * Version.
      *
      * @var string
      */
     public static $carWebVersion = '0.31.1';
     /**
-     * URL
+     * URL.
      *
      * @var string
      */
-    public static $urlBase = "http://{{carWebDomain}}/CarweBVrrB2Bproxy/carwebVrrWebService.asmx/";
+    public static $urlBase = 'http://{{carWebDomain}}/CarweBVrrB2Bproxy/carwebVrrWebService.asmx/';
 
     /**
-     * Call the API
+     * Call the API.
      *
      * @param string                  $url       URL
      * @param array                   $callArray Params
@@ -72,7 +74,7 @@ class CarWebApi
         $responseObject = $client->get(
             $url,
             [
-                'query' => $callArray,
+                'query'  => $callArray,
                 'verify' => false,
 
             ]
@@ -96,7 +98,7 @@ class CarWebApi
     }
 
     /**
-     * What is the Search param
+     * What is the Search param.
      *
      * @param array $callArray Params
      *
@@ -112,7 +114,7 @@ class CarWebApi
     }
 
     /**
-     * Type of Call
+     * Type of Call.
      *
      * @param array $callArray Params
      *

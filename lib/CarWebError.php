@@ -1,25 +1,27 @@
 <?php
 /**
- * CarWeb API
+ * CarWeb API.
  *
  * PHP Version 5.4
  *
  * @category API
- * @package  BespokeSupport\CarWeb
+ *
  * @author   Richard Seymour <web@bespoke.support>
  * @license  MIT https://opensource.org/licenses/MIT
+ *
  * @link     https://github.com/BespokeSupport/CarWeb
  */
 
 namespace BespokeSupport\CarWeb;
 
 /**
- * Class CarWebError
+ * Class CarWebError.
  *
  * @category API
- * @package  BespokeSupport\CarWeb
+ *
  * @author   Richard Seymour <web@bespoke.support>
  * @license  MIT https://opensource.org/licenses/MIT
+ *
  * @link     https://github.com/BespokeSupport/CarWeb
  */
 class CarWebError extends \Exception implements \JsonSerializable
@@ -45,7 +47,7 @@ class CarWebError extends \Exception implements \JsonSerializable
     }
 
     /**
-     * JSON array
+     * JSON array.
      *
      * @return array
      */
@@ -53,7 +55,7 @@ class CarWebError extends \Exception implements \JsonSerializable
     {
         return [
             'error' => $this->getMessage(),
-            'code' => $this->getCode(),
+            'code'  => $this->getCode(),
         ];
     }
 }
