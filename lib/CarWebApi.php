@@ -68,6 +68,7 @@ class CarWebApi
     ) {
         $client = new Client(
             [
+                'connect_timeout' => 3,
             ]
         );
 
